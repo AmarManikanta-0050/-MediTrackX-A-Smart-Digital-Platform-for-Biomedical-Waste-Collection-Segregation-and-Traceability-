@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="jarGlass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0.1)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.4)"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" rx="16" fill="url(#bg3)"/>
+  
+  <rect x="30" y="30" width="340" height="240" rx="12" fill="#0A0F1D" stroke="#7F1D1D" stroke-width="1.5"/>
+
+  <!-- Category Badge -->
+  <rect x="55" y="55" width="140" height="26" rx="6" fill="#DC2626" fill-opacity="0.2" stroke="#DC2626" stroke-width="1"/>
+  <text x="125" y="72" fill="#EF4444" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle">PATHOLOGICAL TISSUE</text>
+
+  <!-- Specimen Container Jar -->
+  <rect x="150" y="95" width="100" height="135" rx="12" fill="url(#jarGlass)" stroke="#94A3B8" stroke-width="2"/>
+  
+  <!-- Red Cap -->
+  <rect x="140" y="85" width="120" height="16" rx="4" fill="#DC2626" stroke="#B91C1C" stroke-width="1.5"/>
+
+  <!-- Formalin preservative fluid -->
+  <rect x="152" y="125" width="96" height="103" rx="8" fill="#F43F5E" fill-opacity="0.25"/>
+
+  <!-- Tissue / Biopsy Specimen inside -->
+  <path d="M 175 145 Q 210 135 225 155 Q 230 185 205 195 Q 170 190 175 145 Z" fill="#991B1B" stroke="#7F1D1D" stroke-width="1.5"/>
+
+  <!-- Biohazard Hazard Label on jar -->
+  <rect x="165" y="160" width="70" height="32" rx="4" fill="#FEF08A" stroke="#EAB308"/>
+  <text x="200" y="174" fill="#000" font-family="system-ui, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">BIOHAZARD</text>
+  <text x="200" y="185" fill="#713F12" font-family="system-ui, sans-serif" font-size="7" text-anchor="middle">SPECIMEN #PAT-04</text>
+
+  <text x="200" y="255" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">
+    Sample Item #PAT-003 • Surgical Biopsy Pathology Tissue
+  </text>
+</svg>

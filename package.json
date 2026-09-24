@@ -1,0 +1,21 @@
+{
+  "name": "meditrackx-monorepo",
+  "version": "1.0.0",
+  "description": "MediTrackX: A Smart Digital Platform for Biomedical Waste Collection, Segregation and Traceability",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client run dev",
+    "seed": "npm --prefix server run seed",
+    "build:client": "npm --prefix client run build",
+    "start": "npm --prefix server start"
+  },
+  "keywords": [
+    "biomedical-waste",
+    "healthcare-saas",
+    "traceability",
+    "mern",
+    "mongodb-atlas"
+  ],
+  "author": "MediTrackX Architecture Team",
+  "license": "ISC"
+}
