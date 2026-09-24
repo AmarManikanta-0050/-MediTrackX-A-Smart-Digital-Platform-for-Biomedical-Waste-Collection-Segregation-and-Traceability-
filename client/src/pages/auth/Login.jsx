@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useNotifications } from '../../context/NotificationContext';
@@ -12,6 +12,13 @@ const Login = () => {
   const { login } = useAuth();
   const { addToast } = useNotifications();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('expired') === 'true') {
+      setError('Your session has expired. Please sign in again.');
+    }
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -36,7 +43,16 @@ const Login = () => {
         navigate('/hospital/dashboard');
       }
     } catch (err) {
-      setError(err.message || 'Failed to sign in. Please verify your credentials.');
+      const msg = err.message || '';
+      if (
+        msg.toLowerCase().includes('network') ||
+        msg.toLowerCase().includes('timeout') ||
+        msg.toLowerCase().includes('failed to fetch')
+      ) {
+        setError('Server is spinning up (free Render tier cold-start takes ~30-45s). Please wait a moment and click Sign In again.');
+      } else {
+        setError(msg || 'Failed to sign in. Please verify your credentials.');
+      }
     } finally {
       setLoading(false);
     }

@@ -75,21 +75,16 @@ const ReportsAnalyticsPage = () => {
   const handleExportCSV = async () => {
     try {
       addToast('Preparing CSV report...', 'info');
-      const token = localStorage.getItem('meditrackx_token');
-      const response = await fetch('/api/reports/export/csv', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (!response.ok) throw new Error('Export generation failed');
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      const blob = await api.get('/reports/export/csv', { responseType: 'blob' });
+      const blobData = blob instanceof Blob ? blob : new Blob([blob], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blobData);
       const a = document.createElement('a');
       a.href = url;
       a.download = `meditrackx-biomedical-report-${new Date().toISOString().split('T')[0]}.csv`;
       document.body.appendChild(a);
       a.click();
       a.remove();
+      window.URL.revokeObjectURL(url);
       addToast('Report exported successfully.', 'success');
     } catch (err) {
       addToast(err.message || 'Export error', 'error');
