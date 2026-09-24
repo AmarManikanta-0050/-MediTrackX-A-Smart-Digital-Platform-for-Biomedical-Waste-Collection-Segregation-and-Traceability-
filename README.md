@@ -281,3 +281,4 @@ MediTrackX was engineered with an open RESTful contract to support future hardwa
 ## 10. License
 
 This project is licensed under the ISC License. Designed and developed as a modern healthcare management platform.
+# -MediTrackX-A-Smart-Digital-Platform-for-Biomedical-Waste-Collection-Segregation-and-Traceability-
