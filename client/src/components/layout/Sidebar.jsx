@@ -150,17 +150,6 @@ const Sidebar = ({ isMobileOpen, closeMobileSidebar }) => {
             })}
           </div>
         </div>
-
-        {/* Future Architecture Status Card Footer */}
-        <div className="p-3.5 m-3 rounded-xl bg-gradient-to-br from-slate-900/90 to-teal-950/30 border border-teal-500/30 flex-shrink-0 shadow-lg">
-          <div className="flex items-center space-x-2 text-[11px] text-teal-300 font-bold mb-1">
-            <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            <span>Next-Gen Suite Active</span>
-          </div>
-          <p className="text-[10px] text-slate-400 leading-tight">
-            AI Vision, IoT Stream, GPS Fleet & AMR Robots operational on live cluster.
-          </p>
-        </div>
       </aside>
     </>
   );
