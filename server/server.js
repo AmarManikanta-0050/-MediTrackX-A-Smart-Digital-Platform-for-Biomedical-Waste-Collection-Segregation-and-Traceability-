@@ -105,7 +105,6 @@ app.use(
     credentials: true,
   })
 );
-app.options('*', (req, res) => res.status(204).end());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
