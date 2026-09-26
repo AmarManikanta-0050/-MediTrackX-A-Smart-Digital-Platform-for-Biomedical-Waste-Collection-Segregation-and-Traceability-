@@ -38,24 +38,50 @@ const MobileNav = () => {
   const links = getLinks();
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-30 glass-panel border-t border-white/10 lg:hidden px-2 py-1.5 flex items-center justify-around">
-      {links.map((link) => {
-        const Icon = link.icon;
-        return (
-          <NavLink
-            key={link.path}
-            to={link.path}
-            className={({ isActive }) =>
-              `flex flex-col items-center justify-center py-1 px-3 rounded-xl text-[10px] font-medium transition-colors ${
-                isActive ? 'text-teal-400 font-bold' : 'text-slate-400 hover:text-slate-200'
-              }`
-            }
-          >
-            <Icon className="w-5 h-5 mb-0.5" />
-            <span>{link.name}</span>
-          </NavLink>
-        );
-      })}
+    <nav
+      className="fixed bottom-0 inset-x-0 z-40 lg:hidden"
+      style={{
+        background: 'rgba(255,255,255,0.97)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderTop: '1px solid rgba(16,185,129,0.12)',
+        boxShadow: '0 -4px 20px rgba(0,0,0,0.06)',
+      }}
+    >
+      <div className="flex items-center justify-around px-2 py-1">
+        {links.map((link) => {
+          const Icon = link.icon;
+          return (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className={({ isActive }) =>
+                `flex flex-col items-center justify-center py-2 px-4 rounded-xl text-[10px] font-semibold transition-all duration-200 min-w-0 flex-1 ${
+                  isActive
+                    ? 'text-emerald-700'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-0.5 transition-all duration-200 ${
+                    isActive
+                      ? 'bg-emerald-100 text-emerald-700'
+                      : 'text-slate-500'
+                  }`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className={isActive ? 'font-bold' : ''}>{link.name}</span>
+                  {isActive && (
+                    <div className="w-1 h-1 rounded-full bg-emerald-500 mt-0.5" />
+                  )}
+                </>
+              )}
+            </NavLink>
+          );
+        })}
+      </div>
     </nav>
   );
 };

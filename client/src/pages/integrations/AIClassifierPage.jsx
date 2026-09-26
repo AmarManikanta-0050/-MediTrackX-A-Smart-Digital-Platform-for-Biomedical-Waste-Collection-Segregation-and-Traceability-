@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { aiService } from '../../services/aiService';
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/NotificationContext';
@@ -159,16 +159,16 @@ const AIClassifierPage = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-teal-500/20 text-teal-400 border border-teal-500/30">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-teal-500/20 text-teal-600 border border-teal-500/30">
               Future Work Module 1
             </span>
-            <span className="text-xs text-slate-400">ResNet-50 BioVision Pipeline</span>
+            <span className="text-xs text-slate-500">ResNet-50 BioVision Pipeline</span>
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight mt-1 flex items-center space-x-2">
-            <Scan className="w-6 h-6 text-teal-400" />
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight mt-1 flex items-center space-x-2">
+            <Scan className="w-6 h-6 text-teal-600" />
             <span>AI Computer Vision Waste Classifier</span>
           </h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-500">
             Automated biomedical waste identification, hazard segregation guidelines, and digital manifest sync.
           </p>
         </div>
@@ -177,7 +177,7 @@ const AIClassifierPage = () => {
           <button
             onClick={() => handleClassify(selectedPreset)}
             disabled={loading}
-            className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-navy-950 font-semibold text-xs shadow-glow-teal transition-all duration-200 disabled:opacity-50"
+            className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-navy-950 font-semibold text-xs shadow-sm transition-all duration-200 disabled:opacity-50"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             <span>Re-Run Vision Inference</span>
@@ -222,11 +222,11 @@ const AIClassifierPage = () => {
         {/* Left Column: Sample Selector & Scanner Input (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
           <GlassCard className="p-5">
-            <h2 className="text-base font-bold text-white mb-3 flex items-center space-x-2">
-              <Layers className="w-4 h-4 text-teal-400" />
+            <h2 className="text-base font-bold text-slate-900 mb-3 flex items-center space-x-2">
+              <Layers className="w-4 h-4 text-teal-600" />
               <span>Diagnostic Waste Presets</span>
             </h2>
-            <p className="text-xs text-slate-400 mb-4">
+            <p className="text-xs text-slate-500 mb-4">
               Select a clinical waste specimen or describe an item to trigger instant AI vision analysis:
             </p>
 
@@ -243,19 +243,19 @@ const AIClassifierPage = () => {
                     }}
                     className={`w-full text-left p-3 rounded-xl border transition-all duration-200 flex items-start space-x-3 ${
                       isSelected
-                        ? 'bg-teal-500/15 border-teal-500/50 shadow-glow-teal text-white'
-                        : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/40'
+                        ? 'bg-teal-500/15 border-teal-500/50 shadow-sm text-slate-900'
+                        : 'bg-white/60 border-slate-800 text-slate-600 hover:border-slate-200 hover:bg-slate-50/40'
                     }`}
                   >
                     <span className="text-2xl flex-shrink-0">{preset.icon}</span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <p className="text-xs font-bold truncate">{preset.name}</p>
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-teal-400">
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-50 text-teal-600">
                           {preset.code}
                         </span>
                       </div>
-                      <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                      <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
                         {preset.description}
                       </p>
                     </div>
@@ -266,7 +266,7 @@ const AIClassifierPage = () => {
 
             {/* Custom Input */}
             <div className="mt-5 pt-4 border-t border-slate-800">
-              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-600 mb-1.5">
                 Custom Waste Specimen Description / Camera Prompt:
               </label>
               <div className="flex gap-2">
@@ -275,12 +275,12 @@ const AIClassifierPage = () => {
                   value={customInput}
                   onChange={(e) => setCustomInput(e.target.value)}
                   placeholder="e.g. Sharps lancet or contaminated surgical drape..."
-                  className="flex-1 px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-teal-500"
+                  className="flex-1 px-3 py-2 text-xs rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-500 focus:outline-none focus:border-teal-500"
                 />
                 <button
                   onClick={() => handleClassify(selectedPreset)}
                   disabled={loading}
-                  className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-teal-300 text-xs font-semibold border border-slate-700"
+                  className="px-3.5 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-teal-700 text-xs font-semibold border border-slate-200"
                 >
                   Analyze
                 </button>
@@ -295,39 +295,39 @@ const AIClassifierPage = () => {
             {loading ? (
               <div className="py-20 flex flex-col items-center justify-center">
                 <LoadingSpinner size="lg" />
-                <p className="text-xs text-slate-400 mt-4 animate-pulse">
+                <p className="text-xs text-slate-500 mt-4 animate-pulse">
                   Extracting visual embeddings & calculating classification matrix...
                 </p>
               </div>
             ) : analysisResult ? (
               <div className="space-y-6">
                 {/* Prediction Hero Header */}
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800/80 to-slate-900 border border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800/80 to-slate-900 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                       Primary Category Detected
                     </span>
-                    <h3 className="text-xl font-extrabold text-white flex items-center space-x-2">
+                    <h3 className="text-xl font-extrabold text-slate-900 flex items-center space-x-2">
                       <span
                         className="w-3 h-3 rounded-full inline-block"
                         style={{ backgroundColor: analysisResult.prediction.colorCode }}
                       />
                       <span>{analysisResult.prediction.categoryName}</span>
                     </h3>
-                    <p className="text-xs text-slate-400">
-                      Container: <span className="text-teal-300 font-semibold">{analysisResult.prediction.recommendedContainer}</span>
+                    <p className="text-xs text-slate-500">
+                      Container: <span className="text-teal-700 font-semibold">{analysisResult.prediction.recommendedContainer}</span>
                     </p>
                   </div>
 
                   {/* Confidence Score Pill */}
                   <div className="flex flex-col sm:items-end">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Confidence Score</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Confidence Score</span>
                     <div className="flex items-baseline space-x-1 mt-0.5">
-                      <span className="text-3xl font-black text-teal-400">
+                      <span className="text-3xl font-black text-teal-600">
                         {analysisResult.prediction.confidence}%
                       </span>
                     </div>
-                    <span className="text-[10px] text-emerald-400 flex items-center space-x-1 mt-0.5">
+                    <span className="text-[10px] text-emerald-600 flex items-center space-x-1 mt-0.5">
                       <Check className="w-3 h-3" />
                       <span>Definitive Segregation</span>
                     </span>
@@ -337,12 +337,12 @@ const AIClassifierPage = () => {
                 {/* Secondary Alternative Probabilities */}
                 {analysisResult.secondaryPredictions?.length > 0 && (
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-400 mb-2">Alternative Class Probabilities:</h4>
+                    <h4 className="text-xs font-semibold text-slate-500 mb-2">Alternative Class Probabilities:</h4>
                     <div className="grid grid-cols-2 gap-3">
                       {analysisResult.secondaryPredictions.map((sec) => (
-                        <div key={sec.code} className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
-                          <span className="text-xs text-slate-300">{sec.name}</span>
-                          <span className="text-xs font-mono font-bold text-slate-400">{sec.confidence}%</span>
+                        <div key={sec.code} className="p-2.5 rounded-xl bg-white/60 border border-slate-800 flex items-center justify-between">
+                          <span className="text-xs text-slate-600">{sec.name}</span>
+                          <span className="text-xs font-mono font-bold text-slate-500">{sec.confidence}%</span>
                         </div>
                       ))}
                     </div>
@@ -351,11 +351,11 @@ const AIClassifierPage = () => {
 
                 {/* Critical Hazard Warnings */}
                 <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-2">
-                  <div className="flex items-center space-x-2 text-xs font-bold text-amber-400">
+                  <div className="flex items-center space-x-2 text-xs font-bold text-amber-600">
                     <AlertTriangle className="w-4 h-4" />
                     <span>Bio-Safety Handling Directives</span>
                   </div>
-                  <ul className="space-y-1.5 pl-6 list-disc text-xs text-slate-300">
+                  <ul className="space-y-1.5 pl-6 list-disc text-xs text-slate-600">
                     {analysisResult.hazardWarnings.map((warn, i) => (
                       <li key={i}>{warn}</li>
                     ))}
@@ -364,11 +364,11 @@ const AIClassifierPage = () => {
 
                 {/* Standard Segregation Instructions */}
                 <div className="p-4 rounded-xl bg-teal-500/10 border border-teal-500/30 space-y-2">
-                  <div className="flex items-center space-x-2 text-xs font-bold text-teal-300">
+                  <div className="flex items-center space-x-2 text-xs font-bold text-teal-700">
                     <CheckCircle2 className="w-4 h-4" />
                     <span>Segregation & Container Protocol</span>
                   </div>
-                  <ul className="space-y-1.5 pl-6 list-disc text-xs text-slate-300">
+                  <ul className="space-y-1.5 pl-6 list-disc text-xs text-slate-600">
                     {analysisResult.segregationInstructions.map((inst, i) => (
                       <li key={i}>{inst}</li>
                     ))}
@@ -379,7 +379,7 @@ const AIClassifierPage = () => {
                 <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
                   <button
                     onClick={() => setIsLogModalOpen(true)}
-                    className="w-full sm:w-auto flex-1 flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-navy-950 font-bold text-xs shadow-glow-teal transition-all duration-200"
+                    className="w-full sm:w-auto flex-1 flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-navy-950 font-bold text-xs shadow-sm transition-all duration-200"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     <span>Approve & Auto-Log to Waste Manifest</span>
@@ -398,25 +398,25 @@ const AIClassifierPage = () => {
         title="Direct Waste Manifest Ingestion"
       >
         <form onSubmit={handleAutoLogSubmit} className="space-y-4">
-          <div className="p-3 rounded-xl bg-teal-500/10 border border-teal-500/30 text-xs text-teal-300">
+          <div className="p-3 rounded-xl bg-teal-500/10 border border-teal-500/30 text-xs text-teal-700">
             <strong>Verified Category:</strong> {analysisResult?.prediction?.categoryName} (
             {analysisResult?.prediction?.confidence}% confidence)
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Origin Department</label>
+            <label className="block text-xs font-semibold text-slate-600 mb-1">Origin Department</label>
             <input
               type="text"
               required
               value={logForm.department}
               onChange={(e) => setLogForm({ ...logForm, department: e.target.value })}
-              className="w-full px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-teal-500"
+              className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-teal-500"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Measured Weight</label>
+              <label className="block text-xs font-semibold text-slate-600 mb-1">Measured Weight</label>
               <input
                 type="number"
                 step="0.1"
@@ -424,15 +424,15 @@ const AIClassifierPage = () => {
                 required
                 value={logForm.quantity}
                 onChange={(e) => setLogForm({ ...logForm, quantity: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-teal-500"
+                className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-teal-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Unit</label>
+              <label className="block text-xs font-semibold text-slate-600 mb-1">Unit</label>
               <select
                 value={logForm.unit}
                 onChange={(e) => setLogForm({ ...logForm, unit: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-teal-500"
+                className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-200 text-slate-900 focus:outline-none focus:border-teal-500"
               >
                 <option value="KG">Kilograms (KG)</option>
                 <option value="L">Liters (L)</option>
@@ -444,7 +444,7 @@ const AIClassifierPage = () => {
             <button
               type="button"
               onClick={() => setIsLogModalOpen(false)}
-              className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+              className="px-4 py-2 text-xs text-slate-500 hover:text-slate-900"
             >
               Cancel
             </button>

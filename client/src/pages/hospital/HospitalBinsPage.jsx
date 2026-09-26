@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import GlassCard from '../../components/common/GlassCard';
 import ProgressBar from '../../components/common/ProgressBar';
@@ -32,8 +32,8 @@ const HospitalBinsPage = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-black tracking-tight text-white">Facility Smart Bins</h1>
-        <p className="text-xs text-slate-400 mt-1">
+        <h1 className="text-2xl font-black tracking-tight text-slate-900">Facility Smart Bins</h1>
+        <p className="text-xs text-slate-500 mt-1">
           Monitor ward-level fill levels, segregation compartments & collection thresholds
         </p>
       </div>
@@ -62,34 +62,34 @@ const HospitalBinsPage = () => {
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <div>
-                      <span className="font-mono text-xs font-bold text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">
+                      <span className="font-mono text-xs font-bold text-teal-600 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">
                         {bin.binId}
                       </span>
-                      <h3 className="mt-1 text-sm font-bold text-white">{bin.department}</h3>
+                      <h3 className="mt-1 text-sm font-bold text-slate-900">{bin.department}</h3>
                     </div>
                     <StatusBadge status={bin.status} />
                   </div>
 
-                  <div className="space-y-2 text-xs text-slate-300 mb-4">
+                  <div className="space-y-2 text-xs text-slate-600 mb-4">
                     <div className="flex items-center space-x-2">
                       <span
                         className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                         style={{ backgroundColor: bin.category?.colorCode || '#0D9488' }}
                       />
-                      <span className="font-semibold text-slate-200">
+                      <span className="font-semibold text-slate-700">
                         {bin.category?.name || 'Waste Category'}
                       </span>
                     </div>
 
                     {bin.locationDescription && (
-                      <div className="flex items-start space-x-2 text-[11px] text-slate-400">
+                      <div className="flex items-start space-x-2 text-[11px] text-slate-500">
                         <MapPin className="w-3.5 h-3.5 mt-0.5 text-slate-500 flex-shrink-0" />
                         <span>{bin.locationDescription}</span>
                       </div>
                     )}
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/40">
+                  <div className="p-3.5 rounded-xl bg-white/60 border border-slate-200/40">
                     <ProgressBar
                       value={bin.currentLevel}
                       max={bin.capacity}
@@ -99,7 +99,7 @@ const HospitalBinsPage = () => {
                       size="md"
                     />
                     {isFull && (
-                      <p className="mt-2 text-[11px] text-rose-400 font-semibold flex items-center space-x-1">
+                      <p className="mt-2 text-[11px] text-rose-600 font-semibold flex items-center space-x-1">
                         <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
                         <span>Bin reached capacity threshold! Please request pickup.</span>
                       </p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { iotService } from '../../services/iotService';
 import { useNotification } from '../../context/NotificationContext';
 import GlassCard from '../../components/common/GlassCard';
@@ -126,13 +126,13 @@ const IoTBinsTelemetryPage = () => {
             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
               Future Work Module 2
             </span>
-            <span className="text-xs text-slate-400">LoRaWAN & MQTT Telemetry Stream</span>
+            <span className="text-xs text-slate-500">LoRaWAN & MQTT Telemetry Stream</span>
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight mt-1 flex items-center space-x-2">
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight mt-1 flex items-center space-x-2">
             <Radio className="w-6 h-6 text-blue-400 animate-pulse" />
             <span>IoT Smart Bins Telemetry Stream</span>
           </h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-500">
             Real-time ultrasonic fill tracking, load-cell mass sensors, thermal anomaly detection, and tamper telemetry.
           </p>
         </div>
@@ -141,14 +141,14 @@ const IoTBinsTelemetryPage = () => {
           <button
             onClick={handleSimulatePulse}
             disabled={pulsing}
-            className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-400 text-navy-950 font-semibold text-xs shadow-glow-teal transition-all duration-200 disabled:opacity-50"
+            className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-400 text-navy-950 font-semibold text-xs shadow-sm transition-all duration-200 disabled:opacity-50"
           >
             <Zap className={`w-4 h-4 ${pulsing ? 'animate-bounce' : ''}`} />
             <span>Simulate Sensor Pulse</span>
           </button>
           <button
             onClick={fetchLiveTelemetry}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"
+            className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
@@ -206,23 +206,23 @@ const IoTBinsTelemetryPage = () => {
                     ? 'border-red-500/50 bg-red-950/20 shadow-[0_0_20px_rgba(239,68,68,0.15)]'
                     : isWarning
                     ? 'border-amber-500/40 bg-amber-950/15'
-                    : 'border-slate-800 hover:border-slate-700'
+                    : 'border-slate-800 hover:border-slate-200'
                 }`}
               >
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="space-y-0.5">
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm font-bold text-white tracking-wide">{bin.binId}</span>
+                      <span className="text-sm font-bold text-slate-900 tracking-wide">{bin.binId}</span>
                       <span
-                        className="px-2 py-0.5 rounded text-[10px] font-bold text-white uppercase"
+                        className="px-2 py-0.5 rounded text-[10px] font-bold text-slate-900 uppercase"
                         style={{ backgroundColor: bin.category?.colorCode || '#0D9488' }}
                       >
                         {bin.category?.code || 'BIO'}
                       </span>
                     </div>
-                    <p className="text-xs font-medium text-slate-300">{bin.department}</p>
-                    <p className="text-[11px] text-slate-400 truncate max-w-[220px]">
+                    <p className="text-xs font-medium text-slate-600">{bin.department}</p>
+                    <p className="text-[11px] text-slate-500 truncate max-w-[220px]">
                       {bin.locationDescription || bin.hospital?.name}
                     </p>
                   </div>
@@ -233,8 +233,8 @@ const IoTBinsTelemetryPage = () => {
                       isCritical
                         ? 'bg-red-500/20 text-red-400 border border-red-500/30 animate-pulse'
                         : isWarning
-                        ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                        : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                        ? 'bg-amber-500/20 text-amber-600 border border-amber-500/30'
+                        : 'bg-emerald-500/20 text-emerald-600 border border-emerald-500/30'
                     }`}
                   >
                     <span>{bin.alertStatus}</span>
@@ -244,11 +244,11 @@ const IoTBinsTelemetryPage = () => {
                 {/* Ultrasonic Fill Level Bar */}
                 <div className="mt-4 pt-4 border-t border-slate-800/80 space-y-1.5">
                   <div className="flex justify-between text-xs">
-                    <span className="text-slate-400 font-semibold flex items-center space-x-1">
+                    <span className="text-slate-500 font-semibold flex items-center space-x-1">
                       <Gauge className="w-3.5 h-3.5 text-blue-400" />
                       <span>Ultrasonic Level</span>
                     </span>
-                    <span className="font-mono font-bold text-white">
+                    <span className="font-mono font-bold text-slate-900">
                       {bin.currentLevel} / {bin.capacity} KG ({bin.fillPercentage}%)
                     </span>
                   </div>
@@ -262,14 +262,14 @@ const IoTBinsTelemetryPage = () => {
                 {/* Telemetry Sensor Metrics Quadrant */}
                 <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
                   {/* Temperature */}
-                  <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
-                    <div className="flex items-center space-x-1.5 text-slate-400">
-                      <Thermometer className="w-3.5 h-3.5 text-amber-400" />
+                  <div className="p-2.5 rounded-xl bg-white/70 border border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center space-x-1.5 text-slate-500">
+                      <Thermometer className="w-3.5 h-3.5 text-amber-600" />
                       <span>Core Temp</span>
                     </div>
                     <span
                       className={`font-mono font-bold ${
-                        bin.temperatureCelsius > 30 ? 'text-red-400' : 'text-slate-200'
+                        bin.temperatureCelsius > 30 ? 'text-red-400' : 'text-slate-700'
                       }`}
                     >
                       {bin.temperatureCelsius}°C
@@ -277,14 +277,14 @@ const IoTBinsTelemetryPage = () => {
                   </div>
 
                   {/* Lid State */}
-                  <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
-                    <div className="flex items-center space-x-1.5 text-slate-400">
+                  <div className="p-2.5 rounded-xl bg-white/70 border border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center space-x-1.5 text-slate-500">
                       <Radio className="w-3.5 h-3.5 text-blue-400" />
                       <span>Lid State</span>
                     </div>
                     <span
                       className={`font-semibold text-[11px] ${
-                        bin.lidStatus === 'Open' ? 'text-amber-400' : 'text-emerald-400'
+                        bin.lidStatus === 'Open' ? 'text-amber-600' : 'text-emerald-600'
                       }`}
                     >
                       {bin.lidStatus}
@@ -292,21 +292,21 @@ const IoTBinsTelemetryPage = () => {
                   </div>
 
                   {/* Battery */}
-                  <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
-                    <div className="flex items-center space-x-1.5 text-slate-400">
-                      <BatteryCharging className="w-3.5 h-3.5 text-emerald-400" />
+                  <div className="p-2.5 rounded-xl bg-white/70 border border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center space-x-1.5 text-slate-500">
+                      <BatteryCharging className="w-3.5 h-3.5 text-emerald-600" />
                       <span>Battery</span>
                     </div>
-                    <span className="font-mono font-semibold text-slate-200">{bin.batteryLevel}%</span>
+                    <span className="font-mono font-semibold text-slate-700">{bin.batteryLevel}%</span>
                   </div>
 
                   {/* LoRaWAN Signal */}
-                  <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
-                    <div className="flex items-center space-x-1.5 text-slate-400">
-                      <Wifi className="w-3.5 h-3.5 text-teal-400" />
+                  <div className="p-2.5 rounded-xl bg-white/70 border border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center space-x-1.5 text-slate-500">
+                      <Wifi className="w-3.5 h-3.5 text-teal-600" />
                       <span>Signal</span>
                     </div>
-                    <span className="font-mono font-semibold text-slate-200">{bin.signalDbm} dBm</span>
+                    <span className="font-mono font-semibold text-slate-700">{bin.signalDbm} dBm</span>
                   </div>
                 </div>
 
@@ -314,7 +314,7 @@ const IoTBinsTelemetryPage = () => {
                 <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
                   <button
                     onClick={() => handleCalibrate(bin.binId)}
-                    className="flex items-center space-x-1 text-slate-400 hover:text-teal-400 transition-colors"
+                    className="flex items-center space-x-1 text-slate-500 hover:text-teal-600 transition-colors"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Tare / Zero</span>
@@ -322,7 +322,7 @@ const IoTBinsTelemetryPage = () => {
 
                   <button
                     onClick={() => openAdjustModal(bin)}
-                    className="flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
+                    className="flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 transition-colors"
                   >
                     <Sliders className="w-3 h-3 text-blue-400" />
                     <span>Simulate Sensor</span>
@@ -342,9 +342,9 @@ const IoTBinsTelemetryPage = () => {
       >
         <form onSubmit={handleSaveAdjust} className="space-y-4">
           <div>
-            <div className="flex justify-between text-xs text-slate-300 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Simulated Fill Mass (KG):</span>
-              <span className="font-bold text-teal-400">
+              <span className="font-bold text-teal-600">
                 {adjustForm.currentLevel} / {selectedBin?.capacity} KG
               </span>
             </div>
@@ -357,14 +357,14 @@ const IoTBinsTelemetryPage = () => {
               onChange={(e) =>
                 setAdjustForm({ ...adjustForm, currentLevel: parseFloat(e.target.value) })
               }
-              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+              className="w-full h-2 bg-slate-50 rounded-lg appearance-none cursor-pointer accent-teal-500"
             />
           </div>
 
           <div>
-            <div className="flex justify-between text-xs text-slate-300 mb-1">
+            <div className="flex justify-between text-xs text-slate-600 mb-1">
               <span>Simulated Core Temp (°C):</span>
-              <span className="font-bold text-amber-400">{adjustForm.temperatureCelsius}°C</span>
+              <span className="font-bold text-amber-600">{adjustForm.temperatureCelsius}°C</span>
             </div>
             <input
               type="range"
@@ -375,31 +375,31 @@ const IoTBinsTelemetryPage = () => {
               onChange={(e) =>
                 setAdjustForm({ ...adjustForm, temperatureCelsius: parseFloat(e.target.value) })
               }
-              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+              className="w-full h-2 bg-slate-50 rounded-lg appearance-none cursor-pointer accent-amber-500"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Lid Status</label>
+              <label className="block text-xs font-semibold text-slate-600 mb-1">Lid Status</label>
               <select
                 value={adjustForm.lidStatus}
                 onChange={(e) => setAdjustForm({ ...adjustForm, lidStatus: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white"
+                className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-200 text-slate-900"
               >
                 <option value="Closed">Hermetically Closed</option>
                 <option value="Open">Lid Open</option>
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Battery Level (%)</label>
+              <label className="block text-xs font-semibold text-slate-600 mb-1">Battery Level (%)</label>
               <input
                 type="number"
                 min="5"
                 max="100"
                 value={adjustForm.batteryLevel}
                 onChange={(e) => setAdjustForm({ ...adjustForm, batteryLevel: parseInt(e.target.value) })}
-                className="w-full px-3 py-2 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white"
+                className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-200 text-slate-900"
               />
             </div>
           </div>
@@ -408,7 +408,7 @@ const IoTBinsTelemetryPage = () => {
             <button
               type="button"
               onClick={() => setIsAdjustModalOpen(false)}
-              className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+              className="px-4 py-2 text-xs text-slate-500 hover:text-slate-900"
             >
               Cancel
             </button>

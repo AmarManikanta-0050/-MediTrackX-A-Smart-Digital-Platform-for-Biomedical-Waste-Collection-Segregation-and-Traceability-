@@ -4,6 +4,9 @@ import { useAuth } from '../context/AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 import Layout from '../components/layout/Layout';
 
+// Landing Page
+import HomePage from '../pages/landing/HomePage';
+
 // Auth Pages
 import Login from '../pages/auth/Login';
 import Register from '../pages/auth/Register';
@@ -62,14 +65,16 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* Public Routes */}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
       {/* Protected Routes Layout */}
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
-          {/* Smart Root Index */}
-          <Route path="/" element={<RootRedirect />} />
+          {/* Smart Dashboard Redirect */}
+          <Route path="/dashboard" element={<RootRedirect />} />
 
           {/* Admin Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

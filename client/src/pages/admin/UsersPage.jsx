@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import GlassCard from '../../components/common/GlassCard';
 import Modal from '../../components/common/Modal';
@@ -135,11 +135,11 @@ const UsersPage = () => {
   const getRoleIcon = (role) => {
     switch (role) {
       case 'admin':
-        return <Shield className="w-3.5 h-3.5 text-rose-400" />;
+        return <Shield className="w-3.5 h-3.5 text-rose-600" />;
       case 'collector':
-        return <Truck className="w-3.5 h-3.5 text-sky-400" />;
+        return <Truck className="w-3.5 h-3.5 text-sky-600" />;
       default:
-        return <UserCheck className="w-3.5 h-3.5 text-teal-400" />;
+        return <UserCheck className="w-3.5 h-3.5 text-teal-600" />;
     }
   };
 
@@ -148,14 +148,14 @@ const UsersPage = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-white">User Accounts</h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">User Accounts</h1>
+          <p className="text-xs text-slate-500 mt-1">
             System access control, staff authentication profiles & collectors
           </p>
         </div>
         <button
           onClick={() => handleOpenModal()}
-          className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal flex items-center space-x-2 transition-all self-start sm:self-auto"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm flex items-center space-x-2 transition-all self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Provision User</span>
@@ -165,7 +165,7 @@ const UsersPage = () => {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
           <input
             type="text"
             value={search}
@@ -184,7 +184,7 @@ const UsersPage = () => {
             setRoleFilter(e.target.value);
             setPage(1);
           }}
-          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
         >
           <option value="">All Roles</option>
           <option value="admin">System Admin</option>
@@ -202,7 +202,7 @@ const UsersPage = () => {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-slate-700/60 text-slate-400 uppercase font-semibold bg-slate-900/40">
+              <thead className="border-b border-slate-200/60 text-slate-500 uppercase font-semibold bg-white/40">
                 <tr>
                   <th className="py-3 px-4">Name</th>
                   <th className="py-3 px-4">Email</th>
@@ -214,31 +214,31 @@ const UsersPage = () => {
               </thead>
               <tbody className="divide-y divide-slate-800">
                 {users.map((u) => (
-                  <tr key={u._id} className="hover:bg-slate-800/30 transition-colors">
-                    <td className="py-3 px-4 font-semibold text-white">
+                  <tr key={u._id} className="hover:bg-slate-50/30 transition-colors">
+                    <td className="py-3 px-4 font-semibold text-slate-900">
                       <div className="flex items-center space-x-2.5">
-                        <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-teal-400 font-bold uppercase text-[11px]">
+                        <div className="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-teal-600 font-bold uppercase text-[11px]">
                           {u.name?.charAt(0) || 'U'}
                         </div>
                         <span>{u.name}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-slate-300 font-mono text-[11px]">{u.email}</td>
+                    <td className="py-3 px-4 text-slate-600 font-mono text-[11px]">{u.email}</td>
                     <td className="py-3 px-4">
-                      <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-800 border border-slate-700">
+                      <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-50 border border-slate-200">
                         {getRoleIcon(u.role)}
                         <span className="capitalize">{u.role.replace('_', ' ')}</span>
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-slate-300">
+                    <td className="py-3 px-4 text-slate-600">
                       {u.hospital?.name || <span className="text-slate-500 italic">None (Global)</span>}
                     </td>
                     <td className="py-3 px-4">
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
                           u.status === 'active'
-                            ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
-                            : 'bg-rose-500/15 text-rose-300 border-rose-500/30'
+                            ? 'bg-emerald-500/15 text-emerald-700 border-emerald-500/30'
+                            : 'bg-rose-500/15 text-rose-700 border-rose-500/30'
                         }`}
                       >
                         {u.status}
@@ -248,13 +248,13 @@ const UsersPage = () => {
                       <div className="flex items-center justify-end space-x-1.5">
                         <button
                           onClick={() => handleOpenModal(u)}
-                          className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                          className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => setDeleteTarget(u)}
-                          className="p-1.5 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-colors"
+                          className="p-1.5 rounded-lg text-rose-600 hover:text-rose-700 hover:bg-rose-500/10 transition-colors"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -284,7 +284,7 @@ const UsersPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Full Name *
               </label>
               <input
@@ -297,7 +297,7 @@ const UsersPage = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Work Email *
               </label>
               <input
@@ -313,7 +313,7 @@ const UsersPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Password {editingUser ? '(leave blank to keep unchanged)' : '*'}
               </label>
               <input
@@ -326,7 +326,7 @@ const UsersPage = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Contact Phone
               </label>
               <input
@@ -341,13 +341,13 @@ const UsersPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 User Role *
               </label>
               <select
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="hospital_staff">Hospital Staff</option>
                 <option value="collector">Waste Collector</option>
@@ -356,13 +356,13 @@ const UsersPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Account Status
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="active">Active</option>
                 <option value="inactive">Inactive / Suspended</option>
@@ -372,18 +372,18 @@ const UsersPage = () => {
 
           {formData.role === 'hospital_staff' && (
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Affiliated Hospital Facility *
               </label>
               <select
                 required
                 value={formData.hospital}
                 onChange={(e) => setFormData({ ...formData, hospital: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="">Select Hospital</option>
                 {hospitals.map((h) => (
-                  <option key={h._id} value={h._id} className="bg-navy-900 text-white">
+                  <option key={h._id} value={h._id} className="bg-surface-tertiary text-slate-900">
                     {h.name} ({h.hospitalId})
                   </option>
                 ))}
@@ -391,18 +391,18 @@ const UsersPage = () => {
             </div>
           )}
 
-          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-700/60">
+          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-200/60">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal transition-all disabled:opacity-50"
+              className="px-5 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm transition-all disabled:opacity-50"
             >
               {submitting ? 'Saving...' : editingUser ? 'Update Account' : 'Provision User'}
             </button>

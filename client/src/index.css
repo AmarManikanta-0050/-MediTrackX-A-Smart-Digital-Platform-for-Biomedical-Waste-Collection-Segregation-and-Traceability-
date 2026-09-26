@@ -2,63 +2,493 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   MediTrackX — Global Design System (Light Healthcare Theme)
+   Primary: Emerald/Teal | Background: White/Light
+   ============================================================ */
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: #070e1a;
-    color: #f1f5f9;
+    background-color: #f0fdf9;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% -10%, rgba(16,185,129,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 110%, rgba(13,148,136,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(2,132,199,0.03) 0%, transparent 70%);
+    color: #0f172a;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 }
 
-/* Glassmorphism Cards & Panels */
+/* ============================================================
+   Card System
+   ============================================================ */
+
+/* Primary surface card — clean white with subtle emerald shadow */
 .glass-panel {
-  background: rgba(15, 27, 49, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(16, 185, 129, 0.05);
 }
 
+/* Hover-interactive card */
 .glass-card {
-  background: rgba(21, 35, 60, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(16, 185, 129, 0.10);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 16px rgba(16, 185, 129, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 .glass-card:hover {
-  background: rgba(23, 44, 76, 0.75);
-  border-color: rgba(20, 184, 166, 0.3);
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 16px 32px rgba(16, 185, 129, 0.09);
+  transform: translateY(-2px);
 }
 
+/* ============================================================
+   Input System
+   ============================================================ */
+
 .glass-input {
-  background: rgba(11, 21, 40, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #f1f5f9;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  color: #0f172a;
+  border-radius: 10px;
   transition: all 0.2s ease;
+}
+
+.glass-input::placeholder {
+  color: #94a3b8;
 }
 
 .glass-input:focus {
   outline: none;
-  border-color: #0d9488;
-  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.2);
+  background: #ffffff;
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
 }
 
-/* Custom Healthcare Scrollbar */
+.glass-input option {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* ============================================================
+   Button System
+   ============================================================ */
+
+.btn-primary {
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+  color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  border: none;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.28);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #047857 0%, #0f766e 100%);
+  box-shadow: 0 6px 18px rgba(5, 150, 105, 0.38);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: white;
+  color: #374151;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 13px;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #059669;
+  color: #059669;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 13px;
+  border: none;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.25);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.35);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   Scrollbar (Light Theme)
+   ============================================================ */
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #070e1a;
+  background: #f1f5f9;
+  border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 9999px;
+  background: #cbd5e1;
+  border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d9488;
+  background: #059669;
+}
+
+/* ============================================================
+   Animation Keyframes
+   ============================================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes draw-line {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   Animation Utility Classes
+   ============================================================ */
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out both;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.4s ease-out both;
+}
+
+.animate-fade-down {
+  animation: fadeDown 0.3s ease-out both;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.35s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out both;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.delay-75 { animation-delay: 75ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ============================================================
+   Skeleton / Shimmer Loader
+   ============================================================ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f1f5f9 25%,
+    #e8f5f2 50%,
+    #f1f5f9 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.8s infinite;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   Badge / Tag System
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+}
+
+.badge-emerald { background: #d1fae5; color: #065f46; border-color: #a7f3d0; }
+.badge-teal { background: #ccfbf1; color: #0f766e; border-color: #99f6e4; }
+.badge-blue { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+.badge-amber { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.badge-rose { background: #ffe4e6; color: #9f1239; border-color: #fecdd3; }
+.badge-sky { background: #e0f2fe; color: #075985; border-color: #bae6fd; }
+.badge-slate { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+
+/* ============================================================
+   Page Section Header
+   ============================================================ */
+
+.page-header {
+  padding-bottom: 20px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.08);
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   Table Styles
+   ============================================================ */
+
+.table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table thead tr {
+  border-bottom: 1px solid #e2f5f0;
+}
+
+.data-table thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.15s ease;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f0fdf9;
+}
+
+.data-table tbody td {
+  padding: 14px 16px;
+  color: #374151;
+}
+
+/* ============================================================
+   Form Styles
+   ============================================================ */
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ============================================================
+   Status Indicator
+   ============================================================ */
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Sidebar Active Nav (custom indicator)
+   ============================================================ */
+
+.nav-link-active {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  color: #065f46 !important;
+  border: 1px solid #a7f3d0;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.12);
+}
+
+.nav-link-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 70%;
+  background: linear-gradient(180deg, #059669, #0d9488);
+  border-radius: 0 3px 3px 0;
+}
+
+/* ============================================================
+   Integration / Premium Section Badge
+   ============================================================ */
+
+.live-badge {
+  background: linear-gradient(135deg, #059669, #0d9488);
+  color: white;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 99px;
+  letter-spacing: 0.08em;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   Reduced Motion Support
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

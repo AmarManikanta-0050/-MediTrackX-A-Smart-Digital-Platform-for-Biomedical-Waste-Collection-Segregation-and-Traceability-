@@ -16,6 +16,7 @@ import {
   Package,
   ArrowLeft,
   Truck,
+  AlertTriangle,
 } from 'lucide-react';
 
 const WasteDetailPage = () => {
@@ -51,13 +52,13 @@ const WasteDetailPage = () => {
   if (error || !wasteRecord) {
     return (
       <div className="space-y-4">
-        <Link
-          to="/"
-          className="inline-flex items-center space-x-2 text-xs text-teal-400 hover:text-teal-300 font-semibold"
+        <button
+          onClick={() => window.history.back()}
+          className="inline-flex items-center space-x-2 text-sm text-emerald-600 hover:text-emerald-800 font-semibold transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Dashboard</span>
-        </Link>
+          <span>Go Back</span>
+        </button>
         <EmptyState
           icon={FileText}
           title="Waste Record Not Found"
@@ -68,31 +69,28 @@ const WasteDetailPage = () => {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Back button & Title */}
+    <div className="space-y-6 animate-fade-up">
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <button
             onClick={() => window.history.back()}
-            className="inline-flex items-center space-x-2 text-xs text-teal-400 hover:text-teal-300 font-semibold mb-2"
+            className="inline-flex items-center space-x-2 text-sm text-emerald-600 hover:text-emerald-800 font-semibold mb-3 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Go Back</span>
           </button>
-          <div className="flex items-center space-x-3">
-            <h1 className="text-2xl font-black tracking-tight text-white font-mono">
+          <div className="flex items-center space-x-3 flex-wrap gap-2">
+            <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 font-mono">
               {wasteRecord.wasteId}
             </h1>
             <StatusBadge status={wasteRecord.status} size="md" />
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Registered on{' '}
             {new Date(wasteRecord.createdAt).toLocaleString([], {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
+              month: 'long', day: 'numeric', year: 'numeric',
+              hour: '2-digit', minute: '2-digit',
             })}
           </p>
         </div>
@@ -100,62 +98,68 @@ const WasteDetailPage = () => {
         {wasteRecord.collectionRequest && (
           <Link
             to={`/collections/${wasteRecord.collectionRequest.requestId}`}
-            className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal flex items-center space-x-2 self-start sm:self-auto"
+            className="btn-primary flex items-center space-x-2 px-4 py-2 text-xs self-start sm:self-auto"
           >
             <Truck className="w-4 h-4" />
-            <span>View Collection Order {wasteRecord.collectionRequest.requestId}</span>
+            <span>View Collection {wasteRecord.collectionRequest.requestId}</span>
           </Link>
         )}
       </div>
 
-      {/* Main Details Grid */}
+      {/* Details Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column: Waste Batch Specs */}
-        <div className="lg:col-span-1 space-y-5">
+
+        {/* Left: Waste Specs */}
+        <div className="lg:col-span-1 space-y-4">
           <GlassCard>
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">
               Biomedical Specifications
             </h3>
 
-            <div className="space-y-4 text-xs">
+            <div className="space-y-4 text-sm">
               <div>
-                <span className="text-slate-400">Waste Category</span>
-                <div className="mt-1 flex items-center space-x-2">
+                <span className="text-xs text-slate-500 font-medium">Waste Category</span>
+                <div className="mt-1.5 flex items-center space-x-2">
                   <span
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: wasteRecord.category?.colorCode || '#0D9488' }}
+                    className="w-3.5 h-3.5 rounded-full flex-shrink-0 border-2 border-white shadow-sm"
+                    style={{ backgroundColor: wasteRecord.category?.colorCode || '#059669' }}
                   />
-                  <span className="text-base font-bold text-white">
-                    {wasteRecord.category?.name} ({wasteRecord.category?.code})
+                  <span className="font-bold text-slate-900">
+                    {wasteRecord.category?.name}
+                    <span className="ml-1 text-slate-500 font-mono text-xs">({wasteRecord.category?.code})</span>
                   </span>
                 </div>
               </div>
 
               <div>
-                <span className="text-slate-400">Hazard Classification</span>
-                <p className="mt-0.5 text-rose-300 font-semibold">
-                  {wasteRecord.category?.hazardLevel || 'Medium'} Severity
-                </p>
+                <span className="text-xs text-slate-500 font-medium">Hazard Classification</span>
+                <div className="mt-1 flex items-center space-x-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+                  <p className="text-amber-700 font-semibold text-xs">
+                    {wasteRecord.category?.hazardLevel || 'Medium'} Severity
+                  </p>
+                </div>
               </div>
 
               <div>
-                <span className="text-slate-400">Net Weight</span>
-                <p className="mt-0.5 text-xl font-bold font-mono text-white">
-                  {wasteRecord.quantity} {wasteRecord.unit}
+                <span className="text-xs text-slate-500 font-medium">Net Weight</span>
+                <p className="text-2xl font-extrabold font-mono text-slate-900 mt-0.5">
+                  {wasteRecord.quantity}
+                  <span className="text-base text-slate-500 font-semibold ml-1">{wasteRecord.unit}</span>
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-slate-700/50">
-                <span className="text-slate-400">Recommended Container</span>
-                <p className="mt-0.5 text-slate-200">
+              <div className="pt-3 border-t border-slate-100">
+                <span className="text-xs text-slate-500 font-medium">Recommended Container</span>
+                <p className="mt-1 text-slate-700 font-medium text-xs">
                   {wasteRecord.category?.recommendedContainer}
                 </p>
               </div>
 
               {wasteRecord.description && (
-                <div className="pt-2 border-t border-slate-700/50">
-                  <span className="text-slate-400">Staff Description</span>
-                  <p className="mt-0.5 text-slate-300 leading-relaxed italic">
+                <div className="pt-3 border-t border-slate-100">
+                  <span className="text-xs text-slate-500 font-medium">Staff Description</span>
+                  <p className="mt-1 text-slate-600 leading-relaxed text-xs italic bg-slate-50 rounded-lg px-3 py-2 border border-slate-100">
                     "{wasteRecord.description}"
                   </p>
                 </div>
@@ -163,49 +167,48 @@ const WasteDetailPage = () => {
             </div>
           </GlassCard>
 
-          {/* Healthcare Facility Card */}
+          {/* Facility Card */}
           <GlassCard>
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">
               Origin Facility
             </h3>
-            <div className="space-y-2 text-xs text-slate-300">
-              <div className="flex items-center space-x-2 font-bold text-white">
-                <Building2 className="w-4 h-4 text-teal-400" />
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center space-x-2 font-bold text-slate-900">
+                <Building2 className="w-4 h-4 text-emerald-600" />
                 <span>{wasteRecord.hospital?.name}</span>
               </div>
-              <p className="text-slate-400 pl-6">
-                Ward: <strong className="text-slate-200">{wasteRecord.department}</strong>
+              <p className="text-slate-500 text-xs pl-6">
+                Ward: <strong className="text-slate-700">{wasteRecord.department}</strong>
               </p>
               {wasteRecord.bin && (
-                <p className="text-slate-400 pl-6 font-mono">
-                  Smart Bin: <strong className="text-teal-400">{wasteRecord.bin.binId}</strong>
+                <p className="text-slate-500 text-xs pl-6 font-mono">
+                  Smart Bin: <strong className="text-emerald-600">{wasteRecord.bin.binId}</strong>
                 </p>
               )}
-              <p className="text-slate-400 pl-6">
-                Logged By: <strong className="text-slate-200">{wasteRecord.createdBy?.name}</strong>
+              <p className="text-slate-500 text-xs pl-6">
+                Logged By: <strong className="text-slate-700">{wasteRecord.createdBy?.name}</strong>
               </p>
             </div>
           </GlassCard>
         </div>
 
-        {/* Right Column: Digital Traceability Audit Timeline */}
+        {/* Right: Timeline */}
         <div className="lg:col-span-2">
           <GlassCard>
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700/60">
+            <div className="flex items-center justify-between mb-5 pb-4 border-b border-slate-100">
               <div>
-                <h3 className="text-base font-bold text-white tracking-wide">
+                <h3 className="text-sm font-bold text-slate-800">
                   End-to-End Digital Traceability Timeline
                 </h3>
-                <p className="text-xs text-slate-400">
-                  Cryptographically tied custody handoffs, collection states & operator timestamps
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Custody handoffs, collection states & operator timestamps
                 </p>
               </div>
-              <div className="flex items-center space-x-1.5 text-xs text-teal-400 font-mono font-bold bg-teal-500/10 px-3 py-1 rounded-full border border-teal-500/20">
-                <ShieldCheck className="w-4 h-4" />
+              <div className="flex items-center space-x-1.5 text-xs text-emerald-700 font-semibold bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-full">
+                <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Audited Chain</span>
               </div>
             </div>
-
             <Timeline events={trackingHistory} />
           </GlassCard>
         </div>

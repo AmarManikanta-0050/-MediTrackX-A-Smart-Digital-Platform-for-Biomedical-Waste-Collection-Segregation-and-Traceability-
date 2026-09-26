@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import GlassCard from '../../components/common/GlassCard';
 import StatCard from '../../components/common/StatCard';
@@ -98,16 +98,16 @@ const ReportsAnalyticsPage = () => {
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-white">Compliance & Waste Analytics</h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">Compliance & Waste Analytics</h1>
+          <p className="text-xs text-slate-500 mt-1">
             Aggregated biomedical waste audit reports, facility rankings & collection completion rates
           </p>
         </div>
         <button
           onClick={handleExportCSV}
-          className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center space-x-2 transition-all self-start sm:self-auto"
+          className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center space-x-2 transition-all self-start sm:self-auto"
         >
-          <Download className="w-4 h-4 text-teal-400" />
+          <Download className="w-4 h-4 text-teal-600" />
           <span>Export Full Audit CSV</span>
         </button>
       </div>
@@ -117,11 +117,11 @@ const ReportsAnalyticsPage = () => {
         <select
           value={selectedHospital}
           onChange={(e) => setSelectedHospital(e.target.value)}
-          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
         >
           <option value="all">All Hospitals (Consolidated)</option>
           {hospitals.map((h) => (
-            <option key={h._id} value={h._id} className="bg-navy-900 text-white">
+            <option key={h._id} value={h._id} className="bg-surface-tertiary text-slate-900">
               {h.name}
             </option>
           ))}
@@ -130,7 +130,7 @@ const ReportsAnalyticsPage = () => {
         <select
           value={selectedDays}
           onChange={(e) => setSelectedDays(e.target.value)}
-          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
         >
           <option value="7">Last 7 Days</option>
           <option value="30">Last 30 Days</option>
@@ -147,14 +147,14 @@ const ReportsAnalyticsPage = () => {
           <GlassCard>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-bold text-white tracking-wide">
+                <h3 className="text-sm font-bold text-slate-900 tracking-wide">
                   Generation Trend Curve (Daily KG)
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500">
                   Daily aggregated biomedical waste volume over selected period
                 </p>
               </div>
-              <div className="flex items-center space-x-1.5 text-xs text-teal-400 font-semibold">
+              <div className="flex items-center space-x-1.5 text-xs text-teal-600 font-semibold">
                 <TrendingUp className="w-4 h-4" />
                 <span>Aggregated Real Data</span>
               </div>
@@ -180,8 +180,8 @@ const ReportsAnalyticsPage = () => {
                     <YAxis stroke="#64748b" fontSize={10} tickLine={false} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#0F1E36',
-                        borderColor: '#1E3A5F',
+                        backgroundColor: '#ffffff',
+                        borderColor: '#e2f5f0',
                         borderRadius: '0.75rem',
                         fontSize: '12px',
                         color: '#fff',
@@ -209,10 +209,10 @@ const ReportsAnalyticsPage = () => {
             {/* By Department */}
             <GlassCard>
               <div className="mb-4">
-                <h3 className="text-sm font-bold text-white tracking-wide">
+                <h3 className="text-sm font-bold text-slate-900 tracking-wide">
                   Departmental Waste Distribution
                 </h3>
-                <p className="text-xs text-slate-400">Total volume accumulated by hospital ward</p>
+                <p className="text-xs text-slate-500">Total volume accumulated by hospital ward</p>
               </div>
 
               <div className="h-64 w-full">
@@ -230,8 +230,8 @@ const ReportsAnalyticsPage = () => {
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#0F1E36',
-                          borderColor: '#1E3A5F',
+                          backgroundColor: '#ffffff',
+                          borderColor: '#e2f5f0',
                           borderRadius: '0.75rem',
                           fontSize: '12px',
                           color: '#fff',
@@ -250,10 +250,10 @@ const ReportsAnalyticsPage = () => {
             {/* Waste By Category Segregation */}
             <GlassCard>
               <div className="mb-4">
-                <h3 className="text-sm font-bold text-white tracking-wide">
+                <h3 className="text-sm font-bold text-slate-900 tracking-wide">
                   Category Segregation Ratio
                 </h3>
-                <p className="text-xs text-slate-400">Color-coded biomedical segregation compliance</p>
+                <p className="text-xs text-slate-500">Color-coded biomedical segregation compliance</p>
               </div>
 
               <div className="h-64 w-full flex items-center justify-center">
@@ -279,8 +279,8 @@ const ReportsAnalyticsPage = () => {
                       </Pie>
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#0F1E36',
-                          borderColor: '#1E3A5F',
+                          backgroundColor: '#ffffff',
+                          borderColor: '#e2f5f0',
                           borderRadius: '0.75rem',
                           fontSize: '11px',
                           color: '#fff',
@@ -289,7 +289,7 @@ const ReportsAnalyticsPage = () => {
                       />
                       <Legend
                         wrapperStyle={{ fontSize: '10px' }}
-                        formatter={(val) => <span className="text-slate-300">{val}</span>}
+                        formatter={(val) => <span className="text-slate-600">{val}</span>}
                       />
                     </PieChart>
                   </ResponsiveContainer>
@@ -303,21 +303,21 @@ const ReportsAnalyticsPage = () => {
           {/* Collection Workflow Status Breakdown */}
           <GlassCard>
             <div className="mb-4">
-              <h3 className="text-sm font-bold text-white tracking-wide">
+              <h3 className="text-sm font-bold text-slate-900 tracking-wide">
                 Collection Workflow Pipeline Breakdown
               </h3>
-              <p className="text-xs text-slate-400">Total collection orders by operational state</p>
+              <p className="text-xs text-slate-500">Total collection orders by operational state</p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {analytics?.requestStatusBreakdown?.map((item) => (
                 <div
                   key={item.status}
-                  className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/50 flex flex-col justify-between"
+                  className="p-4 rounded-xl bg-white/60 border border-slate-200/50 flex flex-col justify-between"
                 >
-                  <span className="text-xs text-slate-400 font-semibold">{item.status}</span>
+                  <span className="text-xs text-slate-500 font-semibold">{item.status}</span>
                   <div className="mt-2 flex items-baseline space-x-2">
-                    <span className="text-2xl font-bold text-white">{item.count}</span>
+                    <span className="text-2xl font-bold text-slate-900">{item.count}</span>
                     <span className="text-xs text-slate-500">requests</span>
                   </div>
                 </div>

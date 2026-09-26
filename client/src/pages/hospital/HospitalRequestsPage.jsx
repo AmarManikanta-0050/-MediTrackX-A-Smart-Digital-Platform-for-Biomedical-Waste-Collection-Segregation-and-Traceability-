@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import GlassCard from '../../components/common/GlassCard';
@@ -114,14 +114,14 @@ const HospitalRequestsPage = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-white">Waste Collection Requests</h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">Waste Collection Requests</h1>
+          <p className="text-xs text-slate-500 mt-1">
             Dispatch pickup requests for accumulated biomedical waste bags & containers
           </p>
         </div>
         <button
           onClick={handleOpenCreateModal}
-          className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal flex items-center space-x-2 transition-all self-start sm:self-auto"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm flex items-center space-x-2 transition-all self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>+ Create Pickup Request</span>
@@ -136,7 +136,7 @@ const HospitalRequestsPage = () => {
             setStatusFilter(e.target.value);
             setPage(1);
           }}
-          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
         >
           <option value="">All Request Statuses</option>
           <option value="Pending">Pending (Awaiting Admin Dispatch)</option>
@@ -160,7 +160,7 @@ const HospitalRequestsPage = () => {
             action={
               <button
                 onClick={handleOpenCreateModal}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 transition-colors"
               >
                 Create Pickup Request
               </button>
@@ -169,7 +169,7 @@ const HospitalRequestsPage = () => {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-slate-700/60 text-slate-400 uppercase font-semibold bg-slate-900/40">
+              <thead className="border-b border-slate-200/60 text-slate-500 uppercase font-semibold bg-white/40">
                 <tr>
                   <th className="py-3 px-4">Request ID</th>
                   <th className="py-3 px-4">Waste Quantity</th>
@@ -185,16 +185,16 @@ const HospitalRequestsPage = () => {
                   const totalKg = req.wasteRecords?.reduce((sum, w) => sum + (w.quantity || 0), 0) || 0;
 
                   return (
-                    <tr key={req._id} className="hover:bg-slate-800/30 transition-colors">
-                      <td className="py-3 px-4 font-mono font-bold text-teal-400">
+                    <tr key={req._id} className="hover:bg-slate-50/30 transition-colors">
+                      <td className="py-3 px-4 font-mono font-bold text-teal-600">
                         <Link to={`/collections/${req.requestId}`} className="hover:underline flex items-center space-x-1">
                           <span>{req.requestId}</span>
                           <ExternalLink className="w-3 h-3 text-slate-500" />
                         </Link>
                       </td>
                       <td className="py-3 px-4 font-mono">
-                        <span className="font-bold text-white">{Math.round(totalKg * 10) / 10} KG</span>{' '}
-                        <span className="text-[11px] text-slate-400">({req.wasteRecords?.length || 0} batches)</span>
+                        <span className="font-bold text-slate-900">{Math.round(totalKg * 10) / 10} KG</span>{' '}
+                        <span className="text-[11px] text-slate-500">({req.wasteRecords?.length || 0} batches)</span>
                       </td>
                       <td className="py-3 px-4">
                         <PriorityBadge priority={req.priority} />
@@ -202,25 +202,25 @@ const HospitalRequestsPage = () => {
                       <td className="py-3 px-4">
                         <StatusBadge status={req.status} />
                       </td>
-                      <td className="py-3 px-4 text-slate-300">
+                      <td className="py-3 px-4 text-slate-600">
                         {req.collector ? (
                           <div>
-                            <div className="font-semibold text-slate-200">{req.collector.name}</div>
+                            <div className="font-semibold text-slate-700">{req.collector.name}</div>
                             {req.collector.phone && (
                               <div className="text-[10px] text-slate-500">{req.collector.phone}</div>
                             )}
                           </div>
                         ) : (
-                          <span className="italic text-amber-400/90 font-medium">Awaiting Dispatch</span>
+                          <span className="italic text-amber-600/90 font-medium">Awaiting Dispatch</span>
                         )}
                       </td>
-                      <td className="py-3 px-4 text-slate-400 text-[11px]">
+                      <td className="py-3 px-4 text-slate-500 text-[11px]">
                         {new Date(req.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                       </td>
                       <td className="py-3 px-4 text-right">
                         <Link
                           to={`/collections/${req.requestId}`}
-                          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-teal-300 border border-slate-700 transition-colors"
+                          className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-50 hover:bg-slate-100 text-teal-700 border border-slate-200 transition-colors"
                         >
                           Track
                         </Link>
@@ -251,13 +251,13 @@ const HospitalRequestsPage = () => {
         <form onSubmit={handleCreateRequest} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Priority Classification *
               </label>
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="Low">Low (Routine Pickup)</option>
                 <option value="Medium">Medium (Standard Next-Day)</option>
@@ -267,7 +267,7 @@ const HospitalRequestsPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Request Notes / Floor Instructions
               </label>
               <input
@@ -282,14 +282,14 @@ const HospitalRequestsPage = () => {
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
                 Select Logged Waste Batches ({selectedWasteIds.length} selected) *
               </label>
               {availableWaste.length > 0 && (
                 <button
                   type="button"
                   onClick={handleSelectAllWaste}
-                  className="text-xs text-teal-400 hover:text-teal-300 font-medium"
+                  className="text-xs text-teal-600 hover:text-teal-700 font-medium"
                 >
                   {selectedWasteIds.length === availableWaste.length ? 'Deselect All' : 'Select All'}
                 </button>
@@ -297,11 +297,11 @@ const HospitalRequestsPage = () => {
             </div>
 
             {availableWaste.length === 0 ? (
-              <div className="p-6 text-center rounded-xl bg-slate-900/60 border border-slate-700/50 text-xs text-slate-400">
+              <div className="p-6 text-center rounded-xl bg-white/60 border border-slate-200/50 text-xs text-slate-500">
                 No unassigned 'Logged' waste records found. Please log waste batches before requesting pickup.
               </div>
             ) : (
-              <div className="max-h-56 overflow-y-auto divide-y divide-slate-800 rounded-xl bg-slate-900/60 border border-slate-700/50 p-2 space-y-1">
+              <div className="max-h-56 overflow-y-auto divide-y divide-slate-800 rounded-xl bg-white/60 border border-slate-200/50 p-2 space-y-1">
                 {availableWaste.map((w) => {
                   const isSelected = selectedWasteIds.includes(w._id);
                   return (
@@ -310,21 +310,21 @@ const HospitalRequestsPage = () => {
                       onClick={() => toggleSelectWaste(w._id)}
                       className={`flex items-center justify-between p-2.5 rounded-lg text-xs cursor-pointer transition-colors ${
                         isSelected
-                          ? 'bg-teal-500/15 border border-teal-500/30 text-white'
-                          : 'hover:bg-slate-800/40 text-slate-300'
+                          ? 'bg-teal-500/15 border border-teal-500/30 text-slate-900'
+                          : 'hover:bg-slate-50/40 text-slate-600'
                       }`}
                     >
                       <div className="flex items-center space-x-2.5">
-                        <div className="text-teal-400">
+                        <div className="text-teal-600">
                           {isSelected ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4 text-slate-500" />}
                         </div>
                         <div>
                           <span className="font-mono font-bold">{w.wasteId}</span>
-                          <span className="ml-2 text-slate-400 font-medium">({w.department})</span>
+                          <span className="ml-2 text-slate-500 font-medium">({w.department})</span>
                           <div className="text-[11px] text-slate-500">{w.category?.name}</div>
                         </div>
                       </div>
-                      <div className="font-mono font-bold text-teal-300">
+                      <div className="font-mono font-bold text-teal-700">
                         {w.quantity} {w.unit}
                       </div>
                     </div>
@@ -334,18 +334,18 @@ const HospitalRequestsPage = () => {
             )}
           </div>
 
-          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-700/60">
+          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-200/60">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting || selectedWasteIds.length === 0}
-              className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal transition-all disabled:opacity-50"
+              className="px-5 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm transition-all disabled:opacity-50"
             >
               {submitting ? 'Submitting Request...' : `Submit Request (${selectedWasteIds.length} Batches)`}
             </button>

@@ -22,24 +22,38 @@ const Modal = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-navy-950/80 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 transition-opacity animate-fade-in"
+        style={{ background: 'rgba(15,23,42,0.40)', backdropFilter: 'blur(6px)' }}
         onClick={onClose}
       />
 
       {/* Modal Card */}
       <div
-        className={`relative w-full ${maxWidth} glass-panel rounded-2xl shadow-2xl border border-white/10 overflow-hidden transform transition-all my-8 z-10`}
+        className={`relative w-full ${maxWidth} rounded-2xl overflow-hidden z-10 my-8 animate-scale-in`}
+        style={{
+          background: '#ffffff',
+          border: '1px solid rgba(16,185,129,0.12)',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.15), 0 4px 20px rgba(16,185,129,0.08)',
+        }}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-800/40">
-          <h3 className="text-lg font-semibold text-white tracking-wide">{title}</h3>
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100" style={{
+          background: 'linear-gradient(135deg, #f0fdf9, #f8fafc)',
+        }}>
+          <h3 className="text-base font-bold text-slate-900">{title}</h3>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors focus:outline-none"
+            aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="p-6 max-h-[80vh] overflow-y-auto">{children}</div>
+
+        {/* Content */}
+        <div className="p-6 max-h-[80vh] overflow-y-auto">
+          {children}
+        </div>
       </div>
     </div>
   );

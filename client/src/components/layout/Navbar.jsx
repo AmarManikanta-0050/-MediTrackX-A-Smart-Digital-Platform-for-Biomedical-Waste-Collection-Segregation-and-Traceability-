@@ -13,6 +13,8 @@ import {
   CheckCircle2,
   AlertTriangle,
   Info,
+  X,
+  Leaf,
 } from 'lucide-react';
 
 const Navbar = ({ toggleMobileSidebar }) => {
@@ -25,7 +27,6 @@ const Navbar = ({ toggleMobileSidebar }) => {
   const profileRef = useRef(null);
   const navigate = useNavigate();
 
-  // Close menus on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (notifRef.current && !notifRef.current.contains(event.target)) {
@@ -50,36 +51,84 @@ const Navbar = ({ toggleMobileSidebar }) => {
   const getRoleBadge = (role) => {
     switch (role) {
       case 'admin':
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/30">System Admin</span>;
+        return (
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-100 text-rose-700 border border-rose-200">
+            System Admin
+          </span>
+        );
       case 'hospital_staff':
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-teal-500/20 text-teal-300 border border-teal-500/30">Hospital Staff</span>;
+        return (
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 border border-emerald-200">
+            Hospital Staff
+          </span>
+        );
       case 'collector':
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/30">Bio Collector</span>;
+        return (
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-sky-100 text-sky-700 border border-sky-200">
+            Bio Collector
+          </span>
+        );
       default:
         return null;
     }
   };
 
+  const getAvatarBg = (role) => {
+    switch (role) {
+      case 'admin': return 'from-rose-500 to-rose-600';
+      case 'hospital_staff': return 'from-emerald-500 to-teal-600';
+      case 'collector': return 'from-sky-500 to-blue-600';
+      default: return 'from-slate-400 to-slate-500';
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-white/10 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full" style={{
+      background: 'rgba(255,255,255,0.97)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      borderBottom: '1px solid rgba(16,185,129,0.12)',
+      boxShadow: '0 1px 12px rgba(0,0,0,0.06)',
+    }}>
       <div className="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-        {/* Left: Mobile hamburger & Brand */}
+
+        {/* Left: Hamburger + Brand */}
         <div className="flex items-center space-x-3 lg:w-64 lg:pr-4 flex-shrink-0">
           <button
             onClick={toggleMobileSidebar}
-            className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 lg:hidden focus:outline-none"
+            className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 lg:hidden focus:outline-none transition-colors"
             aria-label="Open sidebar"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          <Link to="/" className="flex items-center space-x-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-600 via-teal-500 to-sky-400 flex items-center justify-center shadow-glow-teal flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
-              <Activity className="w-5 h-5 text-white" />
+          <Link
+            to="/"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="flex items-center space-x-2.5 group cursor-pointer focus:outline-none"
+            title="Open Home Page"
+          >
+            {/* Medical cross brand mark */}
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-105 shadow-btn-emerald" style={{
+              background: 'linear-gradient(135deg, #059669 0%, #0d9488 100%)',
+              boxShadow: '0 4px 12px rgba(5,150,105,0.30)',
+            }}>
+              <svg viewBox="0 0 20 20" className="w-5 h-5" fill="none">
+                <rect x="8" y="2" width="4" height="16" rx="2" fill="white" />
+                <rect x="2" y="8" width="16" height="4" rx="2" fill="white" />
+                <circle cx="10" cy="10" r="2.5" fill="rgba(255,255,255,0.3)" />
+              </svg>
             </div>
-            <div className="flex items-center space-x-1">
-              <span className="text-xl font-black tracking-tight text-white">MediTrack</span>
-              <span className="text-xl font-black tracking-tight text-teal-400">X</span>
+            <div className="flex flex-col leading-none">
+              <div className="flex items-center space-x-0.5">
+                <span className="text-lg font-black tracking-tight text-slate-900">MediTrack</span>
+                <span className="text-lg font-black tracking-tight text-emerald-600">X</span>
+              </div>
+              <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-[0.12em] hidden sm:block">
+                Biomedical Waste Platform
+              </span>
             </div>
           </Link>
         </div>
@@ -93,54 +142,69 @@ const Navbar = ({ toggleMobileSidebar }) => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Track Waste ID (MW-...) or Request ID (CR-...)"
-              className="w-full pl-10 pr-4 py-2 text-xs rounded-xl glass-input placeholder-slate-500 focus:outline-none"
+              className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl glass-input placeholder-slate-400 focus:outline-none"
             />
           </form>
         </div>
 
-        {/* Right: Notification Bell & Profile dropdown */}
-        <div className="flex items-center space-x-3">
+        {/* Right: Notification Bell & Profile */}
+        <div className="flex items-center space-x-2">
+
           {/* Notification Bell */}
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+              className="relative p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors focus:outline-none"
               aria-label="View notifications"
             >
               <Bell className="w-5 h-5" />
               {unreadCount > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center animate-pulse">
+                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
               )}
             </button>
 
-            {/* Notification Dropdown Popover */}
+            {/* Notification Dropdown */}
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 glass-panel rounded-2xl shadow-2xl border border-white/10 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
-                <div className="p-4 border-b border-white/10 flex items-center justify-between bg-slate-900/60">
+              <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl overflow-hidden z-50 animate-fade-down" style={{
+                background: '#ffffff',
+                border: '1px solid rgba(16,185,129,0.12)',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(16,185,129,0.06)',
+              }}>
+                <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-emerald-50 to-teal-50">
                   <div className="flex items-center space-x-2">
-                    <h4 className="text-sm font-bold text-white">Notifications</h4>
+                    <Bell className="w-4 h-4 text-emerald-600" />
+                    <h4 className="text-sm font-bold text-slate-800">Notifications</h4>
                     {unreadCount > 0 && (
-                      <span className="px-2 py-0.5 text-[11px] rounded-full bg-teal-500/20 text-teal-300 font-semibold">
+                      <span className="px-2 py-0.5 text-[10px] rounded-full bg-emerald-100 text-emerald-700 font-semibold border border-emerald-200">
                         {unreadCount} new
                       </span>
                     )}
                   </div>
-                  {unreadCount > 0 && (
+                  <div className="flex items-center space-x-2">
+                    {unreadCount > 0 && (
+                      <button
+                        onClick={markAllAsRead}
+                        className="text-xs text-emerald-600 hover:text-emerald-800 font-semibold transition-colors"
+                      >
+                        Mark all read
+                      </button>
+                    )}
                     <button
-                      onClick={markAllAsRead}
-                      className="text-xs text-teal-400 hover:text-teal-300 font-medium"
+                      onClick={() => setShowNotifications(false)}
+                      className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
                     >
-                      Mark all read
+                      <X className="w-3.5 h-3.5" />
                     </button>
-                  )}
+                  </div>
                 </div>
 
-                <div className="max-h-72 overflow-y-auto divide-y divide-slate-800">
+                <div className="max-h-72 overflow-y-auto divide-y divide-slate-50">
                   {notifications.length === 0 ? (
-                    <div className="p-6 text-center text-xs text-slate-400">
-                      No notifications right now.
+                    <div className="p-8 text-center">
+                      <Bell className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+                      <p className="text-xs text-slate-400 font-medium">No notifications right now</p>
                     </div>
                   ) : (
                     notifications.map((notif) => (
@@ -153,30 +217,36 @@ const Navbar = ({ toggleMobileSidebar }) => {
                             setShowNotifications(false);
                           }
                         }}
-                        className={`p-3.5 text-xs transition-colors cursor-pointer hover:bg-slate-800/40 flex items-start space-x-3 ${
-                          !notif.read ? 'bg-teal-500/5' : ''
+                        className={`p-3.5 text-xs transition-colors cursor-pointer hover:bg-slate-50 flex items-start space-x-3 ${
+                          !notif.read ? 'bg-emerald-50/60' : ''
                         }`}
                       >
                         <div className="mt-0.5 flex-shrink-0">
                           {notif.type === 'urgent' || notif.type === 'warning' ? (
-                            <AlertTriangle className="w-4 h-4 text-amber-400" />
+                            <div className="w-7 h-7 rounded-lg bg-amber-100 flex items-center justify-center">
+                              <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
+                            </div>
                           ) : notif.type === 'success' ? (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                            <div className="w-7 h-7 rounded-lg bg-emerald-100 flex items-center justify-center">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                            </div>
                           ) : (
-                            <Info className="w-4 h-4 text-teal-400" />
+                            <div className="w-7 h-7 rounded-lg bg-sky-100 flex items-center justify-center">
+                              <Info className="w-3.5 h-3.5 text-sky-600" />
+                            </div>
                           )}
                         </div>
-                        <div className="flex-1">
-                          <p className={`font-semibold ${!notif.read ? 'text-white' : 'text-slate-300'}`}>
+                        <div className="flex-1 min-w-0">
+                          <p className={`font-semibold truncate ${!notif.read ? 'text-slate-900' : 'text-slate-600'}`}>
                             {notif.title}
                           </p>
-                          <p className="mt-0.5 text-slate-400 line-clamp-2">{notif.message}</p>
-                          <span className="mt-1 block text-[10px] text-slate-500">
+                          <p className="mt-0.5 text-slate-500 line-clamp-2">{notif.message}</p>
+                          <span className="mt-1 block text-[10px] text-slate-400">
                             {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </span>
                         </div>
                         {!notif.read && (
-                          <span className="w-2 h-2 rounded-full bg-teal-400 mt-1 flex-shrink-0" />
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
                         )}
                       </div>
                     ))
@@ -190,13 +260,13 @@ const Navbar = ({ toggleMobileSidebar }) => {
           <div className="relative" ref={profileRef}>
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="flex items-center space-x-2.5 p-1.5 rounded-xl hover:bg-slate-800/60 transition-colors focus:outline-none"
+              className="flex items-center space-x-2.5 p-1.5 pr-3 rounded-xl hover:bg-slate-100 transition-colors focus:outline-none border border-transparent hover:border-slate-200"
             >
-              <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-teal-400 font-bold text-xs uppercase shadow-sm">
+              <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${getAvatarBg(user?.role)} flex items-center justify-center text-white font-bold text-xs uppercase shadow-sm`}>
                 {user?.name ? user.name.charAt(0) : 'U'}
               </div>
               <div className="hidden sm:block text-left">
-                <p className="text-xs font-semibold text-white leading-tight truncate max-w-[120px]">
+                <p className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
                   {user?.name || 'User'}
                 </p>
                 <div className="mt-0.5">{getRoleBadge(user?.role)}</div>
@@ -205,31 +275,41 @@ const Navbar = ({ toggleMobileSidebar }) => {
 
             {/* Profile Dropdown */}
             {showProfileMenu && (
-              <div className="absolute right-0 mt-2 w-56 glass-panel rounded-2xl shadow-2xl border border-white/10 overflow-hidden z-50">
-                <div className="p-4 border-b border-white/10 bg-slate-900/60">
-                  <p className="text-xs font-bold text-white truncate">{user?.name}</p>
-                  <p className="text-[11px] text-slate-400 truncate">{user?.email}</p>
+              <div className="absolute right-0 mt-2 w-60 rounded-2xl overflow-hidden z-50 animate-fade-down" style={{
+                background: '#ffffff',
+                border: '1px solid rgba(16,185,129,0.12)',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
+              }}>
+                <div className="p-4 border-b border-slate-100" style={{
+                  background: 'linear-gradient(135deg, #ecfdf5, #f0f9ff)',
+                }}>
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${getAvatarBg(user?.role)} flex items-center justify-center text-white font-bold text-sm mb-2 shadow-sm`}>
+                    {user?.name ? user.name.charAt(0) : 'U'}
+                  </div>
+                  <p className="text-sm font-bold text-slate-900 truncate">{user?.name}</p>
+                  <p className="text-xs text-slate-500 truncate">{user?.email}</p>
                   {user?.hospital?.name && (
-                    <p className="mt-1 text-[11px] text-teal-400 truncate font-medium">
-                      🏥 {user.hospital.name}
-                    </p>
+                    <div className="mt-1.5 flex items-center space-x-1 text-xs text-emerald-700 font-medium">
+                      <span>🏥</span>
+                      <span className="truncate">{user.hospital.name}</span>
+                    </div>
                   )}
                 </div>
                 <div className="p-2 space-y-1">
                   <Link
                     to="/profile"
                     onClick={() => setShowProfileMenu(false)}
-                    className="flex items-center space-x-2.5 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-xl transition-colors"
+                    className="flex items-center space-x-2.5 px-3 py-2.5 text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-xl transition-colors"
                   >
-                    <UserIcon className="w-4 h-4 text-slate-400" />
+                    <UserIcon className="w-4 h-4" />
                     <span>My Profile</span>
                   </Link>
                   <Link
                     to="/traceability"
                     onClick={() => setShowProfileMenu(false)}
-                    className="flex items-center space-x-2.5 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-xl transition-colors md:hidden"
+                    className="flex items-center space-x-2.5 px-3 py-2.5 text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-xl transition-colors md:hidden"
                   >
-                    <Search className="w-4 h-4 text-slate-400" />
+                    <Search className="w-4 h-4" />
                     <span>Track ID</span>
                   </Link>
                   <button
@@ -238,7 +318,7 @@ const Navbar = ({ toggleMobileSidebar }) => {
                       logout();
                       navigate('/login');
                     }}
-                    className="w-full flex items-center space-x-2.5 px-3 py-2 text-xs font-medium text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors"
+                    className="w-full flex items-center space-x-2.5 px-3 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>Sign Out</span>

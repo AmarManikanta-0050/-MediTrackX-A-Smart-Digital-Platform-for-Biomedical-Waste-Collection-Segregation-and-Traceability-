@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import GlassCard from '../../components/common/GlassCard';
 import Modal from '../../components/common/Modal';
@@ -133,14 +133,14 @@ const HospitalsPage = () => {
       {/* Header & Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-white">Healthcare Facilities</h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">Healthcare Facilities</h1>
+          <p className="text-xs text-slate-500 mt-1">
             Registered hospitals, clinics, and medical waste generator profiles
           </p>
         </div>
         <button
           onClick={() => handleOpenModal()}
-          className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal flex items-center space-x-2 transition-all self-start sm:self-auto"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm flex items-center space-x-2 transition-all self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Register Hospital</span>
@@ -150,7 +150,7 @@ const HospitalsPage = () => {
       {/* Filter and Search Bar */}
       <div className="flex items-center space-x-3">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
           <input
             type="text"
             value={search}
@@ -172,7 +172,7 @@ const HospitalsPage = () => {
           action={
             <button
               onClick={() => handleOpenModal()}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 transition-colors"
             >
               Add First Hospital
             </button>
@@ -185,41 +185,41 @@ const HospitalsPage = () => {
               <div>
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-500/10 text-teal-600 border border-teal-500/20">
                       {hosp.hospitalId}
                     </span>
-                    <h3 className="mt-1.5 text-base font-bold text-white leading-snug">{hosp.name}</h3>
+                    <h3 className="mt-1.5 text-base font-bold text-slate-900 leading-snug">{hosp.name}</h3>
                   </div>
                   <span
                     className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
                       hosp.status === 'active'
-                        ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
-                        : 'bg-slate-700/40 text-slate-400 border-slate-600/30'
+                        ? 'bg-emerald-500/15 text-emerald-700 border-emerald-500/30'
+                        : 'bg-slate-100/40 text-slate-500 border-slate-600/30'
                     }`}
                   >
                     {hosp.status}
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-300 mb-4">
+                <div className="space-y-2 text-xs text-slate-600 mb-4">
                   <div className="flex items-start space-x-2">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 mt-0.5 flex-shrink-0" />
+                    <MapPin className="w-3.5 h-3.5 text-slate-500 mt-0.5 flex-shrink-0" />
                     <span>
                       {hosp.address}, {hosp.city}, {hosp.state}
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Phone className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                    <Phone className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
                     <span>{hosp.phone}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Mail className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                    <Mail className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
                     <span className="truncate">{hosp.email}</span>
                   </div>
-                  <div className="flex items-center space-x-2 pt-1 border-t border-slate-700/40">
-                    <User className="w-3.5 h-3.5 text-teal-400 flex-shrink-0" />
-                    <span className="text-slate-400">
-                      Contact: <strong className="text-slate-200">{hosp.contactPerson}</strong>
+                  <div className="flex items-center space-x-2 pt-1 border-t border-slate-200/40">
+                    <User className="w-3.5 h-3.5 text-teal-600 flex-shrink-0" />
+                    <span className="text-slate-500">
+                      Contact: <strong className="text-slate-700">{hosp.contactPerson}</strong>
                     </span>
                   </div>
                 </div>
@@ -229,14 +229,14 @@ const HospitalsPage = () => {
               <div className="flex items-center justify-end space-x-2 pt-3 border-t border-slate-800">
                 <button
                   onClick={() => handleOpenModal(hosp)}
-                  className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                   title="Edit details"
                 >
                   <Edit2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setDeleteTarget(hosp)}
-                  className="p-1.5 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-colors"
+                  className="p-1.5 rounded-lg text-rose-600 hover:text-rose-700 hover:bg-rose-500/10 transition-colors"
                   title="Remove hospital"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -257,7 +257,7 @@ const HospitalsPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Hospital Full Name *
               </label>
               <input
@@ -270,7 +270,7 @@ const HospitalsPage = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Hospital ID Code (Auto-generated if empty)
               </label>
               <input
@@ -284,7 +284,7 @@ const HospitalsPage = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
               Physical Address *
             </label>
             <input
@@ -299,7 +299,7 @@ const HospitalsPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 City *
               </label>
               <input
@@ -312,7 +312,7 @@ const HospitalsPage = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 State / Province *
               </label>
               <input
@@ -328,7 +328,7 @@ const HospitalsPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Contact Phone Number *
               </label>
               <input
@@ -341,7 +341,7 @@ const HospitalsPage = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Official Email Address *
               </label>
               <input
@@ -357,7 +357,7 @@ const HospitalsPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Primary Contact Person / Bio-Safety Officer *
               </label>
               <input
@@ -370,13 +370,13 @@ const HospitalsPage = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Operational Status
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
@@ -384,18 +384,18 @@ const HospitalsPage = () => {
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-700/60">
+          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-200/60">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal transition-all disabled:opacity-50"
+              className="px-5 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm transition-all disabled:opacity-50"
             >
               {submitting ? 'Saving...' : editingHospital ? 'Update Hospital' : 'Register Facility'}
             </button>

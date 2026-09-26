@@ -4,19 +4,32 @@ const PriorityBadge = ({ priority }) => {
   const normalized = (priority || '').toLowerCase();
 
   const config = {
-    urgent: 'bg-rose-500/15 text-rose-300 border-rose-500/40 ring-1 ring-rose-500/30 animate-pulse',
-    high: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
-    medium: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
-    low: 'bg-slate-700/40 text-slate-300 border-slate-600/30',
+    critical: {
+      label: '🔴 Critical',
+      className: 'bg-rose-100 text-rose-800 border-rose-300 font-bold',
+    },
+    high: {
+      label: '🟠 High',
+      className: 'bg-orange-100 text-orange-800 border-orange-300 font-bold',
+    },
+    medium: {
+      label: '🟡 Medium',
+      className: 'bg-amber-100 text-amber-800 border-amber-300',
+    },
+    low: {
+      label: '🟢 Low',
+      className: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+    },
   };
 
-  const badgeClass = config[normalized] || config.medium;
+  const current = config[normalized] || {
+    label: priority || 'Normal',
+    className: 'bg-slate-100 text-slate-700 border-slate-300',
+  };
 
   return (
-    <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${badgeClass}`}
-    >
-      {priority || 'Medium'}
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] border ${current.className}`}>
+      {current.label}
     </span>
   );
 };

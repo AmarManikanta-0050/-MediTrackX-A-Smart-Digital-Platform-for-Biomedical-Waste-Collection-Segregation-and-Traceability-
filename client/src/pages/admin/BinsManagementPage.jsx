@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import GlassCard from '../../components/common/GlassCard';
 import ProgressBar from '../../components/common/ProgressBar';
@@ -143,14 +143,14 @@ const BinsManagementPage = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-white">Smart Bins Directory</h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">Smart Bins Directory</h1>
+          <p className="text-xs text-slate-500 mt-1">
             Real-time fill level telemetry, sensor thresholds & capacity tracking
           </p>
         </div>
         <button
           onClick={() => handleOpenModal()}
-          className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal flex items-center space-x-2 transition-all self-start sm:self-auto"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm flex items-center space-x-2 transition-all self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Add Smart Bin</span>
@@ -160,7 +160,7 @@ const BinsManagementPage = () => {
       {/* Filter and Search Bar */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
           <input
             type="text"
             value={search}
@@ -173,11 +173,11 @@ const BinsManagementPage = () => {
         <select
           value={selectedHospital}
           onChange={(e) => setSelectedHospital(e.target.value)}
-          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
         >
           <option value="">All Hospital Facilities</option>
           {hospitals.map((h) => (
-            <option key={h._id} value={h._id} className="bg-navy-900 text-white">
+            <option key={h._id} value={h._id} className="bg-surface-tertiary text-slate-900">
               {h.name}
             </option>
           ))}
@@ -186,7 +186,7 @@ const BinsManagementPage = () => {
         <select
           value={selectedStatus}
           onChange={(e) => setSelectedStatus(e.target.value)}
-          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+          className="px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
         >
           <option value="">All Statuses</option>
           <option value="Active">Active</option>
@@ -207,7 +207,7 @@ const BinsManagementPage = () => {
           action={
             <button
               onClick={() => handleOpenModal()}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 transition-colors"
             >
               Add First Smart Bin
             </button>
@@ -229,17 +229,17 @@ const BinsManagementPage = () => {
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <div>
-                      <span className="font-mono text-xs font-bold text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">
+                      <span className="font-mono text-xs font-bold text-teal-600 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">
                         {bin.binId}
                       </span>
-                      <h3 className="mt-1 text-sm font-bold text-white">{bin.department}</h3>
+                      <h3 className="mt-1 text-sm font-bold text-slate-900">{bin.department}</h3>
                     </div>
                     <StatusBadge status={bin.status} />
                   </div>
 
-                  <div className="space-y-2 text-xs text-slate-300 mb-4">
+                  <div className="space-y-2 text-xs text-slate-600 mb-4">
                     <div className="flex items-center space-x-2">
-                      <Building2 className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                      <Building2 className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
                       <span className="truncate">{bin.hospital?.name || 'Assigned Hospital'}</span>
                     </div>
 
@@ -248,13 +248,13 @@ const BinsManagementPage = () => {
                         className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                         style={{ backgroundColor: bin.category?.colorCode || '#0D9488' }}
                       />
-                      <span className="font-medium text-slate-200">
+                      <span className="font-medium text-slate-700">
                         {bin.category?.name || 'Category Unset'}
                       </span>
                     </div>
 
                     {bin.locationDescription && (
-                      <div className="flex items-start space-x-2 text-[11px] text-slate-400">
+                      <div className="flex items-start space-x-2 text-[11px] text-slate-500">
                         <MapPin className="w-3.5 h-3.5 mt-0.5 text-slate-500 flex-shrink-0" />
                         <span>{bin.locationDescription}</span>
                       </div>
@@ -262,7 +262,7 @@ const BinsManagementPage = () => {
                   </div>
 
                   {/* Fill Level Metric & Visual Progress */}
-                  <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-700/40 mb-3">
+                  <div className="p-3.5 rounded-xl bg-white/60 border border-slate-200/40 mb-3">
                     <ProgressBar
                       value={bin.currentLevel}
                       max={bin.capacity}
@@ -272,7 +272,7 @@ const BinsManagementPage = () => {
                       size="md"
                     />
                     {isCritical && (
-                      <p className="mt-2 text-[10px] text-rose-400 font-semibold flex items-center space-x-1">
+                      <p className="mt-2 text-[10px] text-rose-600 font-semibold flex items-center space-x-1">
                         <AlertTriangle className="w-3 h-3" />
                         <span>High fill alert! Collection pickup required.</span>
                       </p>
@@ -284,13 +284,13 @@ const BinsManagementPage = () => {
                 <div className="flex items-center justify-end space-x-2 pt-3 border-t border-slate-800">
                   <button
                     onClick={() => handleOpenModal(bin)}
-                    className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                   >
                     <Edit2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setDeleteTarget(bin)}
-                    className="p-1.5 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-colors"
+                    className="p-1.5 rounded-lg text-rose-600 hover:text-rose-700 hover:bg-rose-500/10 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -310,7 +310,7 @@ const BinsManagementPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Bin ID (Auto-generated if empty)
               </label>
               <input
@@ -323,18 +323,18 @@ const BinsManagementPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Hospital Facility *
               </label>
               <select
                 required
                 value={formData.hospital}
                 onChange={(e) => setFormData({ ...formData, hospital: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="">Select Hospital</option>
                 {hospitals.map((h) => (
-                  <option key={h._id} value={h._id} className="bg-navy-900 text-white">
+                  <option key={h._id} value={h._id} className="bg-surface-tertiary text-slate-900">
                     {h.name}
                   </option>
                 ))}
@@ -344,7 +344,7 @@ const BinsManagementPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Department *
               </label>
               <input
@@ -358,18 +358,18 @@ const BinsManagementPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Waste Category *
               </label>
               <select
                 required
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="">Select Category</option>
                 {categories.map((c) => (
-                  <option key={c._id} value={c._id} className="bg-navy-900 text-white">
+                  <option key={c._id} value={c._id} className="bg-surface-tertiary text-slate-900">
                     {c.name} ({c.code})
                   </option>
                 ))}
@@ -379,7 +379,7 @@ const BinsManagementPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Capacity (KG) *
               </label>
               <input
@@ -393,7 +393,7 @@ const BinsManagementPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Current Level (KG)
               </label>
               <input
@@ -407,13 +407,13 @@ const BinsManagementPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                 Status
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-200 focus:outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl glass-input bg-navy-850 text-slate-700 focus:outline-none"
               >
                 <option value="Active">Active</option>
                 <option value="Full">Full</option>
@@ -424,7 +424,7 @@ const BinsManagementPage = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
               Physical Location Details
             </label>
             <input
@@ -436,18 +436,18 @@ const BinsManagementPage = () => {
             />
           </div>
 
-          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-700/60">
+          <div className="mt-6 flex items-center justify-end space-x-3 pt-4 border-t border-slate-200/60">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-glow-teal transition-all disabled:opacity-50"
+              className="px-5 py-2 rounded-xl text-xs font-bold text-slate-900 bg-teal-600 hover:bg-teal-700 shadow-sm transition-all disabled:opacity-50"
             >
               {submitting ? 'Saving...' : editingBin ? 'Update Bin' : 'Deploy Bin'}
             </button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Trash2 } from 'lucide-react';
 
 const ConfirmDialog = ({
   isOpen,
@@ -17,22 +17,26 @@ const ConfirmDialog = ({
     <Modal isOpen={isOpen} onClose={onClose} title={title} maxWidth="max-w-md">
       <div className="flex items-start space-x-4">
         <div
-          className={`p-3 rounded-full flex-shrink-0 ${
-            isDanger ? 'bg-rose-500/10 text-rose-400' : 'bg-amber-500/10 text-amber-400'
+          className={`p-3 rounded-2xl flex-shrink-0 ${
+            isDanger ? 'bg-rose-100 text-rose-600' : 'bg-amber-100 text-amber-600'
           }`}
         >
-          <AlertTriangle className="w-6 h-6" />
+          {isDanger
+            ? <Trash2 className="w-6 h-6" />
+            : <AlertTriangle className="w-6 h-6" />
+          }
         </div>
         <div className="flex-1">
-          <p className="text-sm text-slate-300 leading-relaxed">{message}</p>
+          <p className="text-sm text-slate-700 leading-relaxed">{message}</p>
         </div>
       </div>
+
       <div className="mt-6 flex items-center justify-end space-x-3">
         <button
           type="button"
           onClick={onClose}
           disabled={loading}
-          className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+          className="btn-secondary px-4 py-2 text-sm"
         >
           {cancelText}
         </button>
@@ -40,10 +44,10 @@ const ConfirmDialog = ({
           type="button"
           onClick={onConfirm}
           disabled={loading}
-          className={`px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all shadow-md ${
+          className={`px-4 py-2 rounded-xl text-sm font-bold text-white transition-all shadow-sm ${
             isDanger
-              ? 'bg-rose-600 hover:bg-rose-500 shadow-rose-900/30'
-              : 'bg-teal-600 hover:bg-teal-500 shadow-teal-900/30'
+              ? 'bg-rose-600 hover:bg-rose-700 shadow-rose-200'
+              : 'btn-primary'
           }`}
         >
           {loading ? 'Processing...' : confirmText}
